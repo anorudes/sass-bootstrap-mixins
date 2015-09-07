@@ -5,6 +5,7 @@ body {
   @include grid-gutters(20px, 10px, 10px, 10px);
 }
 ````
+Columns: (3/12 for lg, 6/12 for md, 12/12 for sm, 12/12 for xs)
 ```sass
 .gallery {
   @include row();
@@ -14,7 +15,7 @@ body {
 }
 ```
 
-Auto row, col and clear:
+Auto row, columns and clear:
 ```sass
 .gallery {
   @include grid(3, 6, 12, 12);
