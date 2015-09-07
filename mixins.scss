@@ -1,0 +1,139 @@
+// ***************************************************************************
+// Mixins for bootstrap grid
+// ***************************************************************************
+
+$xs-full: 0px 500px;
+$sm-full: 0px 768px;
+$md-full: 0px 1400px;
+$lg-full: 1401px;
+
+$grid-gutter-lg: 20px;
+$grid-gutter-md: 20px;
+$grid-gutter-sm: 20px;
+$grid-gutter-xs: 20px;
+
+@mixin span($px) {
+  @include make-col-span($px);
+}
+
+@mixin grid-gutters($g-lg, $g-md: $g-lg, $g-sm: $g-md, $g-xs: $g-sm) {
+  $grid-gutter-lg: $g-lg !global;
+  $grid-gutter-md: $g-md !global;
+  $grid-gutter-sm: $g-sm !global;
+  $grid-gutter-xs: $g-xs !global;
+}
+
+@mixin grid($col-lg, $col-md: $col-lg, $col-sm: $col-md, $col-xs: $col-sm) {
+  @include clear();
+  >div, >.col {
+    position: relative;
+  }
+  @include breakpoint($lg-full) {
+    @include make-row($grid-gutter-lg);
+    >div, >.col {
+      @include make-col($grid-gutter-lg);
+      @include make-col-span($col-lg);
+      $col: 12 / $col-lg;
+      &:nth-child(#{$col}n+1) {
+        clear: right;
+      }
+    }
+  }
+  @include breakpoint($md-full) {
+    @include make-row($grid-gutter-md);
+    >div, >.col {
+      @include make-col($grid-gutter-md);
+      @include make-col-span($col-md);
+      $col: 12 / $col-md;
+      &:nth-child(#{$col}n+1) {
+        clear: right;
+      }
+    }
+  }
+  @include breakpoint($sm-full) {
+    @include make-row($grid-gutter-sm);
+    >div, >.col {
+      @include make-col($grid-gutter-sm);
+      @include make-col-span($col-sm);
+      $col: 12 / $col-sm;
+      &:nth-child(#{$col}n+1) {
+        clear: right;
+      }
+    }
+  }
+  @include breakpoint($xs-full) {
+    @include make-row($grid-gutter-xs);
+    >div, >.col {
+      @include make-col($grid-gutter-xs);
+      @include make-col-span($col-xs);
+      $col: 12 / $col-xs;
+      &:nth-child(#{$col}n+1) {
+        clear: right;
+      }
+    }
+  }
+}
+
+@mixin row() {
+  @include clear();
+  @include breakpoint($lg-full) {
+    @include make-row($grid-gutter-lg);
+  }
+  @include breakpoint($md-full) {
+    @include make-row($grid-gutter-md);
+  }
+  @include breakpoint($sm-full) {
+    @include make-row($grid-gutter-sm);
+  }
+  @include breakpoint($xs-full) {
+    @include make-row($grid-gutter-xs);
+  }
+}
+
+@mixin with-gutters($g-lg, $g-md: $g-lg, $g-sm: $g-md, $g-xs: $g-sm) {
+  $grid-gutter-lg-old: $grid-gutter-lg;
+  $grid-gutter-md-old: $grid-gutter-md;
+  $grid-gutter-sm-old: $grid-gutter-sm;
+  $grid-gutter-xs-old: $grid-gutter-xs;
+  $grid-gutter-lg: $g-lg !global;
+  $grid-gutter-md: $g-md !global;
+  $grid-gutter-sm: $g-sm !global;
+  $grid-gutter-xs: $g-xs !global;
+  @content;
+  $grid-gutter-lg: $grid-gutter-lg-old !global;
+  $grid-gutter-md: $grid-gutter-lg-old !global;
+  $grid-gutter-sm: $grid-gutter-lg-old !global;
+  $grid-gutter-xs: $grid-gutter-lg-old !global;
+}
+
+@mixin col($col-lg, $col-md: $col-lg, $col-sm: $col-md, $col-xs: $col-sm) {
+  position: relative;
+  @include breakpoint($lg-full) {
+    @include make-col($grid-gutter-lg);
+    @include make-col-span($col-lg);
+  }
+  @include breakpoint($md-full) {
+    @include make-col($grid-gutter-md);
+    @include make-col-span($col-md);
+  }
+  @include breakpoint($sm-full) {
+    @include make-col($grid-gutter-sm);
+    @include make-col-span($col-sm);
+  }
+  @include breakpoint($xs-full) {
+    @include make-col($grid-gutter-xs);
+    @include make-col-span($col-xs);
+  }
+}
+
+@mixin col-offset($size, $columns: $grid-columns) {
+  margin-left: percentage($size / $columns);
+}
+
+@mixin col-push($size, $columns: $grid-columns) {
+  left: if($size > 0, percentage($size / $columns), auto);
+}
+
+@mixin col-pull($size, $columns: $grid-columns) {
+  right: if($size > 0, percentage($size / $columns), auto);
+}
