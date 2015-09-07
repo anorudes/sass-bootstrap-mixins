@@ -1,11 +1,11 @@
 ## Examples
-Global gutters(for lg, md, sm, xs):
+Global gutters (for lg, md, sm, xs):
 ```sass
 body {
   @include grid-gutters(20px, 10px, 10px, 10px);
 }
 ````
-Columns(3/12 for lg, 6/12 for md, 12/12 for sm, 12/12 for xs):
+Columns (3/12 for lg, 6/12 for md, 12/12 for sm, 12/12 for xs):
 ```sass
 .gallery {
   @include row();
